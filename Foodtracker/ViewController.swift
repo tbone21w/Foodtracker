@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate,  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
    // MARK: Properties
    @IBOutlet weak var nameTextField: UITextField!
    @IBOutlet weak var mealNameLabel: UILabel!
-   
+   @IBOutlet weak var photoImageView: UIImageView!
    
    
    // MARK: overrides
@@ -44,10 +44,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
    }
 
    
+   // MARK: UIImagePickerControllerDelegate
+   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+      dismissViewControllerAnimated(true, completion: nil)
+   }
+   
+   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+      let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+      
+      //use this image and close
+      photoImageView.image = selectedImage
+      dismissViewControllerAnimated(true, completion: nil)
+   }
+   
    
    // MARK: Actions
    @IBAction func setDefaultLabelText(sender: UIButton) {
       mealNameLabel.text = "Default Text"
+   }
+   
+   @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+      //hide keyboard it may be open
+      nameTextField.resignFirstResponder()
+      let imagePickerController = UIImagePickerController()
+      
+      //only allow photos to be picked not taken
+      imagePickerController.sourceType = .PhotoLibrary
+      
+      imagePickerController.delegate = self
+      presentViewController(imagePickerController, animated: true, completion: nil)
    }
 
 }
