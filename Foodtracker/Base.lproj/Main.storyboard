@@ -92,7 +92,7 @@
                                             <outletCollection property="gestureRecognizers" destination="MR0-gd-fgM" appends="YES" id="Wks-0g-KH8"/>
                                         </connections>
                                     </imageView>
-                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="JgV-1O-IuY" customClass="RatingControl">
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="JgV-1O-IuY" customClass="RatingControl" customModule="Foodtracker" customModuleProvider="target">
                                         <rect key="frame" x="160" y="374" width="240" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -111,16 +111,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Meal" id="MZ2-ij-hR0">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0Dr-Cl-CT5"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="hMT-IV-1zy"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0Dr-Cl-CT5">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="erg-Up-aMd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="hMT-IV-1zy">
+                            <connections>
+                                <segue destination="7at-gX-BL6" kind="unwind" unwindAction="unwindToMealList:" id="HIh-qd-2zs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="nameTextField" destination="rCe-c7-6oB" id="UWV-KK-yhE"/>
                         <outlet property="photoImageView" destination="DkQ-M4-bUB" id="9Zc-3q-QHJ"/>
                         <outlet property="ratingControl" destination="JgV-1O-IuY" id="B9S-zA-Gnj"/>
+                        <outlet property="saveButton" destination="hMT-IV-1zy" id="tqc-hK-gIB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="7at-gX-BL6" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="MR0-gd-fgM">
                     <connections>
                         <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="egf-Dv-Wvd"/>

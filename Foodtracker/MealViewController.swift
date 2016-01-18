@@ -14,6 +14,13 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
    @IBOutlet weak var nameTextField: UITextField!
    @IBOutlet weak var photoImageView: UIImageView!
    @IBOutlet weak var ratingControl: RatingControl!
+   @IBOutlet weak var saveButton: UIBarButtonItem!
+   
+   /*
+      this value is either passd by 'MealTableViewController' in 'prepareForSegue(_:sender)'
+      or constructed as part of adding a new meal.
+   */
+   var meal: Meal?
    
    // MARK: overrides
    override func viewDidLoad() {
@@ -21,6 +28,9 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
       
       //handle text field's user input through delegate callbacks
       nameTextField.delegate = self
+      
+      //Enable the Save button only if the text field has a valid meal name
+      checkValidMealname()
    }
 
    override func didReceiveMemoryWarning() {
@@ -39,9 +49,20 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
    }
    
    func textFieldDidEndEditing(textField: UITextField) {
-      
+      checkValidMealname()
+      navigationItem.title = textField.text
+   }
+   
+   func textFieldDidBeginEditing(textField: UITextField) {
+      //disable save while editing
+      saveButton.enabled = false
    }
 
+   func checkValidMealname() {
+      //disable the Save button if the text field is empty
+      let text = nameTextField.text ?? ""
+      saveButton.enabled = !text.isEmpty
+   }
    
    // MARK: UIImagePickerControllerDelegate
    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -56,6 +77,20 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
       dismissViewControllerAnimated(true, completion: nil)
    }
    
+   // MARK: Navigation
+   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+      if saveButton === sender {
+         let name = nameTextField.text ?? ""
+         let photo = photoImageView.image
+         let rating = ratingControl.rating
+         
+         meal = Meal(name: name, photo: photo, rating: rating)
+      }
+   }
+   
+   @IBAction func cancel(sender: UIBarButtonItem) {
+      dismissViewControllerAnimated(true, completion: nil)
+   }
    
    // MARK: Actions   
    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
