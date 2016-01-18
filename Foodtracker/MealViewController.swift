@@ -29,6 +29,14 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
       //handle text field's user input through delegate callbacks
       nameTextField.delegate = self
       
+      //if we have a meal unwrap and set values in UI
+      if let meal = meal {
+         navigationItem.title = meal.name
+         nameTextField.text = meal.name
+         photoImageView.image = meal.photo
+         ratingControl.rating = meal.rating
+      }
+      
       //Enable the Save button only if the text field has a valid meal name
       checkValidMealname()
    }
@@ -89,7 +97,15 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
    }
    
    @IBAction func cancel(sender: UIBarButtonItem) {
-      dismissViewControllerAnimated(true, completion: nil)
+      //Determine if view came from nav controller (ShowDetail --> nav) or not (AddItem --> modal)
+      let isPresentingInAddMealMode = presentingViewController is UINavigationController
+      
+      if isPresentingInAddMealMode {
+         dismissViewControllerAnimated(true, completion: nil)
+      } else {
+         navigationController!.popViewControllerAnimated(true)
+      }
+      
    }
    
    // MARK: Actions   
