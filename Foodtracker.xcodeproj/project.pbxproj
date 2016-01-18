@@ -406,6 +406,7 @@
 				4E4DC3431C48953800D3F61E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E4DC3441C48953800D3F61E /* Build configuration list for PBXNativeTarget "FoodtrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +415,7 @@
 				4E4DC3461C48953800D3F61E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
