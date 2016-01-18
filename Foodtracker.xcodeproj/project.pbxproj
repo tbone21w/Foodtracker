@@ -42,7 +42,7 @@
 		4E4DC33C1C48953800D3F61E /* FoodtrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodtrackerTests.swift; sourceTree = "<group>"; };
 		4E4DC33E1C48953800D3F61E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E4DC3471C4BFCC200D3F61E /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
-		4E4DC3491C4D1F6900D3F61E /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		4E4DC3491C4D1F6900D3F61E /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meal.swift; path = ../Meal.swift; sourceTree = "<group>"; };
 		4E4DC34C1C4D29BA00D3F61E /* MealTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 		4E4DC34E1C4D2F5F00D3F61E /* MealTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,7 +68,6 @@
 		4E4DC31B1C48953800D3F61E = {
 			isa = PBXGroup;
 			children = (
-				4E4DC3491C4D1F6900D3F61E /* Meal.swift */,
 				4E4DC3261C48953800D3F61E /* Foodtracker */,
 				4E4DC33B1C48953800D3F61E /* FoodtrackerTests */,
 				4E4DC3251C48953800D3F61E /* Products */,
@@ -87,6 +86,7 @@
 		4E4DC3261C48953800D3F61E /* Foodtracker */ = {
 			isa = PBXGroup;
 			children = (
+				4E4DC3491C4D1F6900D3F61E /* Meal.swift */,
 				4E4DC3271C48953800D3F61E /* AppDelegate.swift */,
 				4E4DC3291C48953800D3F61E /* MealViewController.swift */,
 				4E4DC3471C4BFCC200D3F61E /* RatingControl.swift */,
