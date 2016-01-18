@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RatingController: UIView {
+class RatingControl: UIView {
    
    // MARK: Properties
    var rating = 0 {
