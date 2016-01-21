@@ -14,7 +14,7 @@ class RatingControl: UIView {
    var rating = 0 {
       didSet {
          //property observer, triggers a layout
-         setNeedsDisplay()
+         setNeedsLayout()
       }
    }
    
