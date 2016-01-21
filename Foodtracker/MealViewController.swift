@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, RatingControlDelegate {
 
    // MARK: Properties
    @IBOutlet weak var nameTextField: UITextField!
@@ -29,6 +29,8 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
       //handle text field's user input through delegate callbacks
       nameTextField.delegate = self
       
+      ratingControl.delegate = self
+      
       //if we have a meal unwrap and set values in UI
       if let meal = meal {
          navigationItem.title = meal.name
@@ -39,6 +41,7 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
       
       //Enable the Save button only if the text field has a valid meal name
       checkValidMealname()
+      
    }
 
    override func didReceiveMemoryWarning() {
@@ -49,9 +52,8 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
    
    
    // MARK: UITextFieldDelegate
-   func textFieldShouldReturn(textField: UITextField) -> Bool {
-      //hide the keyboard
-      textField.resignFirstResponder()
+   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+      checkValidMealname()
       
       return true
    }
@@ -62,14 +64,14 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
    }
    
    func textFieldDidBeginEditing(textField: UITextField) {
-      //disable save while editing
-      saveButton.enabled = false
+      checkValidMealname()
    }
 
    func checkValidMealname() {
       //disable the Save button if the text field is empty
       let text = nameTextField.text ?? ""
-      saveButton.enabled = !text.isEmpty
+      print("checkValidMealname \(!text.isEmpty && ratingControl.rating != 0)")
+      saveButton.enabled = (!text.isEmpty && ratingControl.rating != 0)
    }
    
    // MARK: UIImagePickerControllerDelegate
@@ -83,6 +85,12 @@ class MealViewController: UIViewController, UITextFieldDelegate,  UIImagePickerC
       //use this image and close
       photoImageView.image = selectedImage
       dismissViewControllerAnimated(true, completion: nil)
+      checkValidMealname()
+   }
+   
+   // MARK: RatingControlDelegate
+   func didSelectRating(rating: Int) {
+      checkValidMealname()
    }
    
    // MARK: Navigation

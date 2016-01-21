@@ -18,6 +18,8 @@ class RatingControl: UIView {
       }
    }
    
+   var delegate: RatingControlDelegate?
+   
    var ratingButtons = [UIButton]()
    var spacing = 5
    var stars = 5
@@ -69,6 +71,8 @@ class RatingControl: UIView {
    func ratingButtonTapped(button: UIButton) {
       rating = ratingButtons.indexOf(button)! + 1
       updateButtonSelectionStates()
+      
+      delegate?.didSelectRating(rating)
    }
    
    func updateButtonSelectionStates() {
@@ -77,4 +81,9 @@ class RatingControl: UIView {
          button.selected = index < rating
       }
    }
+}
+
+
+protocol RatingControlDelegate {
+   func didSelectRating(rating: Int)
 }
